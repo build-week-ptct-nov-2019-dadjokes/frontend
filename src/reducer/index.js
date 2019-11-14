@@ -1,5 +1,8 @@
 export const initialState = {
-  jokes: []
+  jokes: [],
+  isLoading: false,
+  error: "",
+  loggedIn: false
 };
 
 export const reducer = (state = initialState, action) => {
