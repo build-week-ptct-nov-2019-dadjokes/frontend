@@ -15,6 +15,7 @@ export const reducer = (state = initialState, action) => {
     case FETCH_JOKES_START:
       return {
         ...state,
+        jokes: [],
         isLoading: true,
         error: ""
       };
