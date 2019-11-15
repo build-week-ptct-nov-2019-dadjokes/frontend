@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.links {
+  font-size: 1.5rem;
+  color: #0E0E40;
+  margin-top: 1.5rem;
+}
+
+.img {
+  height: 9%;
+  width: 10%;
+  margin-top: 0.5rem;
+
+
+}
+.card {
+  background-color: #77BFB8;
+}
