@@ -7,8 +7,7 @@ import {
 export const initialState = {
   jokes: [],
   isLoading: false,
-  error: "",
-  loggedIn: false
+  error: ""
 };
 
 export const reducer = (state = initialState, action) => {
