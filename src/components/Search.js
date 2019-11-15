@@ -1,4 +1,5 @@
 import React from 'react'
+import './Components.css'
 
 class SearchForm extends React.Component {
     handleSubmit = (event) => {
@@ -17,7 +18,7 @@ class SearchForm extends React.Component {
       return (
         <form action="/search" onSubmit={this.handleSubmit}>
           <input type="text" name="q" />
-          <select name="category">
+          <select className="searchbox" name="category">
             <option value="" selected>Category</option>
             <option value="kids">Kids</option>
             <option value="wife">Wife</option>
