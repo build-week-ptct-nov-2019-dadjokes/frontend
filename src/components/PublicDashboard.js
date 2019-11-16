@@ -5,7 +5,7 @@ import "../index.css";
 import logo from "./dadjokes.png";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
-const StyledP = styled.p`
+export const StyledP = styled.p`
     color: black;
 `;
 
@@ -17,11 +17,6 @@ const StyledSection = styled.section`
     padding-top: 3rem;
 `;
 
-const StyledName = styled.p`
-    color: #A64000;
-    font-size: 3rem;
-    font-family: Georgia, serif;
-`;
 
 const StyledNav = styled.nav`
 
@@ -29,8 +24,7 @@ const StyledNav = styled.nav`
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    border-bottom: 1px solid black;
-    background-color: #008B8B;
+    background-color: white;
     padding-bottom: 0.5rem;
 
 `;
@@ -40,7 +34,7 @@ let Joke = {
     joke: `"No, I got them all cut!"`,
 };
 
-const JokeCard = () => {
+export const JokeCard = () => {
     return(
         <div>
             <Card>
@@ -59,18 +53,24 @@ function PublicDashboard() {
     return(
         <div>
             <StyledNav>
-                <StyledName>Dad Jokes</StyledName>
                 <img src={logo} className="img" alt="Logo" />
                 <Link className="links" to="/login">Login</Link>
                 <Link className="links" to="/register">Register</Link>
             </StyledNav>
             <StyledSection>
                 <h1>Welcome to Dad Jokes! </h1>
+                
                 <StyledP>This is an app dedicated to all of the people out there who enjoy good (or bad) dad jokes.</StyledP>
                 <StyledP>Some of our features include viewing public jokes open to everyone, to private jokes you can save to your account if you've registered.</StyledP>
-                <StyledP>Displayed below are some of the public jokes available.</StyledP>
+                <StyledP>Displayed below is an example of a joke available to users.</StyledP>
                 <JokeCard />
             </StyledSection>
+            <footer>
+                <StyledNav>
+                    <a className="links" href="#">Home</a>
+                    <a className="links" href="#">About Us</a>
+                </StyledNav>
+            </footer>
         </div>
         
     )

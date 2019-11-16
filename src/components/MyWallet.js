@@ -1,19 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
-import { Link } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText } from "reactstrap";
-
-const StyledNav = styled.nav`
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    background-color: white;
-    padding-bottom: 0.5rem;
-
-`;
 
 const StyledP = styled.p`
     color: black;
@@ -27,12 +16,24 @@ const StyledSection = styled.section`
     padding-top: 3rem;
 `;
 
+
+const StyledNav = styled.nav`
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    background-color: white;
+    padding-bottom: 0.5rem;
+
+`;
+
 let Joke = {
     title: `"Dad, did you get a haircut?"`,
     joke: `"No, I got them all cut!"`,
 };
 
-const JokeCard = () => {
+export const JokeCard = () => {
     return(
         <div>
             <Card>
@@ -45,18 +46,23 @@ const JokeCard = () => {
     )
 }
 
-function UserDashboard() { 
+
+
+
+
+function MyWallet() {
     return(
         <div>
             <StyledNav>
                 <img alt="Logo" src={logo} className="img" />
-                <Link to="/mywallet" className="links">My Wallet</Link>
+                <Link to="/userdashboard" className="links">User Dashboard</Link>
                 <Link to="/searchjokes" className="links">Search Jokes</Link>
                 <Link to="/addjoke" className="links">Add Joke</Link>
+
             </StyledNav>
             <StyledSection>
                 <h1>Welcome User!</h1>
-                <StyledP>Here you can find all of our jokes, and have features at the top such as view your private wallet, search, and add jokes.</StyledP>
+                <StyledP>Here you can find all of your private jokes that you've added to your account.</StyledP>
                 <StyledP>Test joke displayed below</StyledP>
                 <JokeCard />
             </StyledSection>
@@ -70,4 +76,4 @@ function UserDashboard() {
     )
 }
 
-export default UserDashboard;
+export default MyWallet;
