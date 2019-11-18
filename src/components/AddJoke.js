@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useInput } from "../hooks/useInput";
 
 export const AddJoke = () => {
-  const [joke, setJoke] = useState("");
-  const [punchline, setPunchline] = useState("");
-  const [privateJoke, setPrivateJoke] = useState(false);
-
-  const handleChange = e => {};
+  const [joke, handleJokeChange] = useInput("");
+  const [punchline, handlePunchlineChange] = useInput("");
+  const [privateJoke, handlePrivateJokeChange] = useInput(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -16,19 +15,19 @@ export const AddJoke = () => {
       <h1>Add a new Joke</h1>
       <form onSubmit={handleSubmit}>
         <input
-          onChange={e => handleChange(e)}
+          onChange={handleJokeChange}
           name="joke"
           value={joke}
           type="text"
         />
         <input
-          onChange={e => handleChange(e)}
+          onChange={handlePunchlineChange}
           name="punchline"
           value={punchline}
           type="text"
         />
         <input
-          onChange={e => handleChange(e)}
+          onChange={handlePrivateJokeChange}
           type="checkbox"
           name="privateJoke"
         />
