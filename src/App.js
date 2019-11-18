@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
+import './App.css';
+import Register from './components/Register';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello Dad Jokes</h1>
+      <header className="App-header">
+        <Register/>
+        
+      </header>
     </div>
   );
 }
