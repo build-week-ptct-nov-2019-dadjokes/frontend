@@ -79,7 +79,7 @@ export default function Register(props) {
 
   function renderForm() {
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="regInfo">
         <FormGroup controlId="firstname" bsSize="large">
           <FormLabel>First Name</FormLabel>
           <FormControl
@@ -132,13 +132,12 @@ export default function Register(props) {
             value={fields.confirmPassword}
           />
         </FormGroup>
-        <LoaderButton
+        <LoaderButton style={{background: "#0E0E40", border: "#0E0E40" }}
           block
           type="submit"
           bsSize="large"
           isLoading={isLoading}
-          disabled={!validateForm()}
-        >
+          disabled={!validateForm()}>
           Signup
         </LoaderButton>
       </form>
