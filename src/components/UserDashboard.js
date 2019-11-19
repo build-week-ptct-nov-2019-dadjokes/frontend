@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
 import { Link } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
-
+import JokeCard from "./JokeCard";
+import axios from "axios";
 const StyledNav = styled.nav`
 
     display: flex;
@@ -27,25 +27,30 @@ const StyledSection = styled.section`
     padding-top: 3rem;
 `;
 
-let Joke = {
-    title: `"Dad, did you get a haircut?"`,
-    joke: `"No, I got them all cut!"`,
-};
-
-const JokeCard = () => {
-    return(
-        <div>
-            <Card>
-                <CardBody>
-                    <CardTitle>{Joke.title}</CardTitle>
-                    <CardText>{Joke.joke}</CardText>
-                </CardBody>
-            </Card>
-        </div>
-    )
-}
-
 function UserDashboard() { 
+    const [jokes, setJokes] = useState([]);
+    const [joke, setJoke] = useState([]);
+    
+
+    useEffect(() => {
+        axios
+            .get("https://lambda-dad-jokes.herokuapp.com/api/jokes/public")
+            .then(res => {
+                setJokes(res.data);
+                setJoke({ id: 100, joke: "Don't trust atoms.", punchline: "They make up everything!"});
+                
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, []);
+
+    const onSubmit = event => {
+        event.preventDefault();
+        setJoke(jokes[Math.floor(Math.random() * jokes.length)]);
+    };
+    
     return(
         <div>
             <StyledNav>
@@ -57,8 +62,11 @@ function UserDashboard() {
             <StyledSection>
                 <h1>Welcome User!</h1>
                 <StyledP>Here you can find all of our jokes, and have features at the top such as view your private wallet, search, and add jokes.</StyledP>
-                <StyledP>Test joke displayed below</StyledP>
-                <JokeCard />
+                <StyledP>One of our jokes is displayed below, press next joke to get another.</StyledP>
+                <form onSubmit={onSubmit}>
+                    <button type="submit" className="search-button">New Joke</button>
+                </form>
+                <JokeCard id={joke.id} joke={joke.joke} punchline={joke.punchline} />
             </StyledSection>
             <footer>
                 <StyledNav>

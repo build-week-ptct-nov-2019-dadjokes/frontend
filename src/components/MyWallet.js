@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
+import JokeCard from "./JokeCard";
+import axios from "axios";
 
 const StyledP = styled.p`
     color: black;
@@ -28,29 +29,26 @@ const StyledNav = styled.nav`
 
 `;
 
-let Joke = {
-    title: `"Dad, did you get a haircut?"`,
-    joke: `"No, I got them all cut!"`,
-};
-
-export const JokeCard = () => {
-    return(
-        <div>
-            <Card>
-                <CardBody>
-                    <CardTitle>{Joke.title}</CardTitle>
-                    <CardText>{Joke.joke}</CardText>
-                </CardBody>
-            </Card>
-        </div>
-    )
-}
 
 
 
 
-
-function MyWallet() {
+function MyWallet(props) {
+    const [all, setAll] = useState([]);
+    
+    console.log(props);
+    
+    useEffect(() => {
+        axios
+            .get("https://lambda-dad-jokes.herokuapp.com/api/jokes")
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, []);
+    
     return(
         <div>
             <StyledNav>
@@ -58,13 +56,13 @@ function MyWallet() {
                 <Link to="/userdashboard" className="links">User Dashboard</Link>
                 <Link to="/searchjokes" className="links">Search Jokes</Link>
                 <Link to="/addjoke" className="links">Add Joke</Link>
-
+                
             </StyledNav>
             <StyledSection>
                 <h1>Welcome User!</h1>
                 <StyledP>Here you can find all of your private jokes that you've added to your account.</StyledP>
                 <StyledP>Test joke displayed below</StyledP>
-                <JokeCard />
+                
             </StyledSection>
             <footer>
                 <StyledNav>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./dadjokes.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
+import axios from "axios";
 
 const StyledP = styled.p`
     color: black;
@@ -29,7 +30,7 @@ const StyledNav = styled.nav`
 
 `;
 
-function AddJoke({ errors, touched }) {
+function AddJoke({ values, errors, touched }) {
     return (
         <div>
             <StyledNav>
@@ -43,9 +44,15 @@ function AddJoke({ errors, touched }) {
                 <StyledP>Here you can add a joke to your wallet, only you can see it!</StyledP>
                 <Form>
                     <div>
-                        {touched.name && errors.name && <p>{errors.name}</p>}
-                        <Field type="text" name="name" placeholder="Joke" />
+                        {touched.joke && errors.joke && <p>{errors.joke}</p>}
+                        <Field type="text" name="joke" placeholder="Joke Setup" />
                     </div>
+                    <div>
+                        {touched.punchline && errors.punchline && <p>{errors.punchline}</p>}
+                        <Field type="text" name="punchline" placeholder="Joke Punchline" />
+                    </div>
+                    <label>Check for private</label>
+                    <Field type="checkbox" name="privateJoke" checked={values.privateJoke} />
                     <button className="search-button" type="submit">Add Joke</button>
                 </Form>
             </StyledSection>
@@ -60,21 +67,35 @@ function AddJoke({ errors, touched }) {
 }
 
 const FormikAddForm = withFormik({
-    mapPropsToValues({ name }) {
+    mapPropsToValues({ joke, punchline, privateJoke }) {
         return {
-            name: name || ""
+            joke: joke || "",
+            punchline: punchline || "",
+            privateJoke: privateJoke || false 
         }
     },
 
     validationSchema: Yup.object().shape({
-        name: Yup.string()
-            .min(20, "Your joke must be at least 20 characters long")
-            .max(400, "The max limit is 400 characters")
-            .required("You must type in a joke to submit")
+        joke: Yup.string()
+            .min(5, "Your joke must be at least 5 characters long")
+            .max(50, "The max limit is 50 characters")
+            .required("You must type in a joke header to submit"),
+        punchline: Yup.string()
+            .min(5, "Your joke must be at least 5 characters long")
+            .max(50, "The max limit is 50 characters")
+            .required("You must type in a joke header to submit"),
+        
     }),
 
     handleSubmit(values) {
-        console.log(values);
+            axios
+                .post("https://lambda-dad-jokes.herokuapp.com/api/jokes", values)
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
     }
 })(AddJoke);
 

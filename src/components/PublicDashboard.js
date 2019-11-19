@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../index.css";
 import logo from "./dadjokes.png";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
+import axios from "axios";
+import JokeCard from "./JokeCard";
 
-export const StyledP = styled.p`
+
+const StyledP = styled.p`
     color: black;
 `;
 
@@ -29,26 +31,44 @@ const StyledNav = styled.nav`
 
 `;
 
-let Joke = {
-    title: `"Dad, did you get a haircut?"`,
-    joke: `"No, I got them all cut!"`,
-};
-
-export const JokeCard = () => {
-    return(
-        <div>
-            <Card>
-                <CardBody>
-                    <CardTitle>{Joke.title}</CardTitle>
-                    <CardText>{Joke.joke}</CardText>
-                </CardBody>
-            </Card>
-        </div>
-    )
-}
-
-
 function PublicDashboard() {  
+    
+    const [jokes, setJokes] = useState([]);
+    const [joke, setJoke] = useState([]);
+    
+
+    useEffect(() => {
+        axios
+            .get("https://lambda-dad-jokes.herokuapp.com/api/jokes/public")
+            .then(res => {
+                setJokes(res.data);
+                setJoke({ id: 100, joke: "Don't trust atoms.", punchline: "They make up everything!"});
+                
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }, []);
+        
+
+    /*function SetCard() {
+        if(jokes.length === 0) {
+            return null;
+        } else {
+            let random1 = jokes[Math.floor(Math.random() * jokes.length)];
+            
+            return(
+                <div>
+                    <JokeCard key={random1.id} joke={random1.joke} punchline={random1.punchline} />
+                </div>
+        )
+    }};*/
+    
+    const onSubmit = event => {
+        event.preventDefault();
+        setJoke(jokes[Math.floor(Math.random() * jokes.length)]);
+    };
     
     return(
         <div>
@@ -59,11 +79,13 @@ function PublicDashboard() {
             </StyledNav>
             <StyledSection>
                 <h1>Welcome to Dad Jokes! </h1>
-                
                 <StyledP>This is an app dedicated to all of the people out there who enjoy good (or bad) dad jokes.</StyledP>
                 <StyledP>Some of our features include viewing public jokes open to everyone, to private jokes you can save to your account if you've registered.</StyledP>
-                <StyledP>Displayed below is an example of a joke available to users.</StyledP>
-                <JokeCard />
+                <StyledP>Displayed below is a joke included in our jokes database.</StyledP>
+                <form onSubmit={onSubmit}>
+                    <button type="submit" className="search-button">New Joke</button>
+                </form>
+                <JokeCard id={joke.id} joke={joke.joke} punchline={joke.punchline} />      
             </StyledSection>
             <footer>
                 <StyledNav>
@@ -74,6 +96,7 @@ function PublicDashboard() {
         </div>
         
     )
+    
 }
 
 export default PublicDashboard;

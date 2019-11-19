@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Login from "./components/Login";
 import PublicDashboard from "./components/PublicDashboard";
 import UserDashboard from "./components/UserDashboard";
 import MyWallet from "./components/MyWallet";
@@ -10,7 +9,8 @@ import FormikAddForm from "./components/AddJoke";
 function App() {
   return (
     <div className="App">
-      <FormikSearchForm />
+      <UserDashboard />
+      
 
       
       
