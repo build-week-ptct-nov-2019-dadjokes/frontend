@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.links {
+  font-size: 1.2rem;
+  color: #A64000;
+  margin-top: 2rem;
+  font-family: Courier New, monospace;
+}
+
+.img {
+  height: 10%;
+  width: 10%;
+  margin-top: 0.5rem;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+}
+
+.search-button {
+  color: #A64000;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #77BFB8;
+  border: 1px solid white;
+}
