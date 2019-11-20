@@ -7,7 +7,7 @@ export const PUT_JOKES_FAILED = "PUT_JOKES_FAILED";
 export const putJokes = id => dispatch => {
   dispatch({ type: PUT_JOKES_START });
   axios()
-    .put(`/api/auth/jokes/${id}`)
+    .put(`/api/jokes/${id}`)
     .then(res => dispatch({ type: PUT_JOKES_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: PUT_JOKES_FAILED, payload: err.response }));
 };
