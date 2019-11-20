@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project Canvas
+
+https://docs.google.com/document/d/1Py8qrSWfLJAZSZkMwVW8bp6Lf0jrnCEMbEolCK0KV80/edit?usp=sharing
 
 ## Available Scripts
 
