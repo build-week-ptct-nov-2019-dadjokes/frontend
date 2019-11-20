@@ -4,15 +4,14 @@ import PublicDashboard from "./components/PublicDashboard";
 import UserDashboard from "./components/UserDashboard";
 import MyWallet from "./components/MyWallet";
 import FormikAddForm from "./components/AddJoke";
+import './App.css';
+import Register from './components/Register';
+
 
 function App() {
   return (
     <div className="App">
-      <FormikAddForm />
-      
-
-      
-      
+      <FormikAddForm />    
       <Switch>
         <Route exact path="/" />
         <Route path="/register" />
@@ -22,7 +21,6 @@ function App() {
         <Route path="/searchjokes" />
         <Route path="/addjoke" component={FormikAddForm} />
       </Switch>  
-      
     </div>
   );
 }
