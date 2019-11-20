@@ -50,20 +50,7 @@ function PublicDashboard() {
                 console.log(error);
             })
         }, []);
-        
 
-    /*function SetCard() {
-        if(jokes.length === 0) {
-            return null;
-        } else {
-            let random1 = jokes[Math.floor(Math.random() * jokes.length)];
-            
-            return(
-                <div>
-                    <JokeCard key={random1.id} joke={random1.joke} punchline={random1.punchline} />
-                </div>
-        )
-    }};*/
     
     const onSubmit = event => {
         event.preventDefault();

@@ -33,10 +33,8 @@ const StyledNav = styled.nav`
 
 
 
-function MyWallet(props) {
+function MyWallet() {
     const [all, setAll] = useState([]);
-    
-    console.log(props);
     
     useEffect(() => {
         axios
@@ -60,7 +58,7 @@ function MyWallet(props) {
             </StyledNav>
             <StyledSection>
                 <h1>Welcome User!</h1>
-                <StyledP>Here you can find all of your private jokes that you've added to your account.</StyledP>
+                <StyledP>Here you can find all of your private jokes submitted to your account.</StyledP>
                 <StyledP>Test joke displayed below</StyledP>
                 
             </StyledSection>

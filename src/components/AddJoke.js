@@ -41,7 +41,7 @@ function AddJoke({ values, errors, touched }) {
             </StyledNav>
             <StyledSection>
                 <h1>Welcome User!</h1>
-                <StyledP>Here you can add a joke to your wallet, only you can see it!</StyledP>
+                <StyledP>Here you can add a joke to your wallet, or public list to display to everyone!</StyledP>
                 <Form>
                     <div>
                         {touched.joke && errors.joke && <p>{errors.joke}</p>}
@@ -77,13 +77,13 @@ const FormikAddForm = withFormik({
 
     validationSchema: Yup.object().shape({
         joke: Yup.string()
-            .min(5, "Your joke must be at least 5 characters long")
-            .max(50, "The max limit is 50 characters")
-            .required("You must type in a joke header to submit"),
+            .min(10, "Your joke must be at least 10 characters long")
+            .max(80, "The max limit is 80 characters")
+            .required("You must make a joke header to submit"),
         punchline: Yup.string()
-            .min(5, "Your joke must be at least 5 characters long")
-            .max(50, "The max limit is 50 characters")
-            .required("You must type in a joke header to submit"),
+            .min(10, "Your joke must be at least 10 characters long")
+            .max(80, "The max limit is 80 characters")
+            .required("You must make a joke punchline to submit"),
         
     }),
 
