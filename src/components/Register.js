@@ -1,152 +1,123 @@
-import React, { useState } from "react";
-import {
-  FormGroup,
-  FormControl,
-  FormLabel
-} from "react-bootstrap";
-import LoaderButton from "./LoaderButton";
-import { useFormFields } from './libs/hookLibs';
+import React, { Component } from 'react'
+import { Button, Modal, Nav, NavItem, Row, Col, FormGroup } from 'react-bootstrap'
+import axios from 'axios';
+import { Cookies } from 'react-cookie'
+
+export default class Register extends Component {
+
+  constructor() {
+    super();
+    console.log(this)
+    this.render.bind(this);
+    this.state = {showModal: false}
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
 
 
-export default function Register(props) {
-  const [fields, handleFieldChange] = useFormFields({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    confirmationCode: ""
-  });
-  const [newUser, setNewUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  function validateForm() {
-    return (
-      fields.firstname.length > 0 &&
-      fields.lastname.length > 0 &&
-      fields.username.length > 0 &&
-      fields.email.length > 0 &&
-      fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
-    );
   }
 
-  function validateConfirmationForm() {
-    return fields.confirmationCode.length > 0;
+  close() {
+    this.setState({ showModal: false });
   }
 
-  async function handleSubmit(event) {
+  open() {
+    this.setState({ showModal: true });
+  }
+
+  handleFirstNameChange(e) {
+    this.setState({firstName: e.target.value});
+  }
+
+  handleLastNameChange(e) {
+    this.setState({lastName: e.target.value});
+  }
+
+  handleEmailChange(e) {
+    this.setState({email: e.target.value});
+  }
+
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value});
+  }
+
+  signUp() {
+    console.log(this)
+    var that = this;
+    axios.post('https://api.tech/users', {
+      user: {
+        email: this.state.email,
+        password: this.state.password
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+      var userInfo = {id: response.data.data.id, token: response.data.data.attributes['auth-token']}
+      Cookies.save('user', userInfo);
+      axios({
+        method: 'put',
+        url: 'https://api.tech/users/' + response.data.data.id,
+        headers: {'Authorization': response.data.data.attributes['auth-token']},
+        data: {
+          user: {
+            first_name: that.state.firstName,
+            last_name: that.state.lastName
+          }
+        }
+      });
+      that.setState({ showModal: false });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  handleSelect(event) {
     event.preventDefault();
-
-    setIsLoading(true);
-
-    setNewUser("test");
-
-    setIsLoading(false);
+    alert(`selected ${event}`);
   }
-
-  async function handleConfirmationSubmit(event) {
-    event.preventDefault();
-
-    setIsLoading(true);
-  }
-
-  function renderConfirmationForm() {
+  render () {
     return (
-      <form onSubmit={handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
-          <FormLabel>Confirmation Code</FormLabel>
-          <FormControl
-            autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
-          />
-        </FormGroup>
-        <LoaderButton
-          block
-          type="submit"
-          bsSize="large"
-          isLoading={isLoading}
-          disabled={!validateConfirmationForm()}
-        >
-          Verify
-        </LoaderButton>
-      </form>
-    );
+      <div>
+        <span onClick={this.open.bind(this)}>Sign Up</span>
+
+        <Modal show={this.state.showModal} onHide={this.close.bind(this)} className="modal-wrapper signup-modal">
+          <Modal.Body>
+            <Nav bsStyle='pills'   activeKey={this.eventKey}  onSelect={this.handleSelect}>
+              <NavItem eventKey={2} title="Item" ><span className="login-nav-tab">Sign Up</span></NavItem>
+            </Nav>
+            <form>
+              <FormGroup>
+                <input value={this.state.firstName} onChange={this.handleFirstNameChange} className="form-control" placeholder="First Name"/>
+              </FormGroup>
+              <FormGroup>
+                <input value={this.state.lastName} onChange={this.handleLastNameChange} className="form-control" placeholder="Last Name"/>
+              </FormGroup>
+              <FormGroup>
+                <input value={this.state.email} onChange={this.handleEmailChange} className="form-control" placeholder="Email"/>
+              </FormGroup>
+              <FormGroup>
+                <input value={this.state.password} onChange={this.handlePasswordChange} className="form-control" placeholder="Password"/>
+              </FormGroup>
+              <Row>
+                <Col md={12}>
+                  <p className="term-conditions">
+                    By signing up, I agree to the <a href="javascript:void(0);">Terms of Service</a> and <a href="javascript:void(0);">Privacy Policy</a>
+                  </p>
+                </Col>
+                <Col md={12}>
+                  <Button onClick={this.signUp.bind(this)} className="btn btn-black btn-block">Sign Up</Button>
+                </Col>
+              </Row>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className="btn btn-black" onClick={this.close.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    )
   }
 
-  function renderForm() {
-    return (
-      <form onSubmit={handleSubmit} className="regInfo">
-        <FormGroup controlId="firstname" bsSize="large">
-          <FormLabel>First Name</FormLabel>
-          <FormControl
-            autoFocus
-            type="firstname"
-            value={fields.firstname}
-            onChange={handleFieldChange}
-          />
-          </FormGroup>
-          <FormGroup controlId="lastname" bsSize="large">
-          <FormLabel>Last Name</FormLabel>
-          <FormControl
-            autoFocus
-            type="lastname"
-            value={fields.lastname}
-            onChange={handleFieldChange}
-          />
-          </FormGroup>
-          <FormGroup controlId="username" bsSize="large">
-          <FormLabel>Username</FormLabel>
-          <FormControl
-            autoFocus
-            type="username"
-            value={fields.username}
-            onChange={handleFieldChange}
-          />
-          </FormGroup>
-        <FormGroup controlId="email" bsSize="large">
-          <FormLabel>Email</FormLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <FormLabel>Password</FormLabel>
-          <FormControl
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
-          <FormLabel>Confirm Password</FormLabel>
-          <FormControl
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </FormGroup>
-        <LoaderButton style={{background: "#0E0E40", border: "#0E0E40" }}
-          block
-          type="submit"
-          bsSize="large"
-          isLoading={isLoading}
-          disabled={!validateForm()}>
-          Signup
-        </LoaderButton>
-      </form>
-    );
-  }
-
-  return (
-    <div className="register">
-      {newUser === null ? renderForm() : renderConfirmationForm()}
-    </div>
-  );
 }
