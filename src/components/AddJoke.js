@@ -33,6 +33,7 @@ function AddJoke({ values, errors, touched, status }) {
 
   useEffect(() => {
     dispatch(postJokes(status));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   return (
