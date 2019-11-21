@@ -4,6 +4,11 @@ import {
   FETCH_JOKES_FAILED
 } from "../actions";
 import {
+  FETCH_ALL_JOKES_START,
+  FETCH_ALL_JOKES_SUCCESS,
+  FETCH_ALL_JOKES_FAILED
+} from "../actions/allJokesAction";
+import {
   POST_JOKES_START,
   POST_JOKES_SUCCESS,
   POST_JOKES_FAILED
@@ -28,6 +33,7 @@ export const initialState = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_JOKES_START ||
+      FETCH_ALL_JOKES_START ||
       POST_JOKES_START ||
       PUT_JOKES_START ||
       DELETE_JOKES_START:
@@ -38,6 +44,7 @@ export const reducer = (state = initialState, action) => {
         error: ""
       };
     case FETCH_JOKES_SUCCESS ||
+      FETCH_ALL_JOKES_SUCCESS ||
       POST_JOKES_SUCCESS ||
       PUT_JOKES_SUCCESS ||
       DELETE_JOKES_SUCCESS:
@@ -48,6 +55,7 @@ export const reducer = (state = initialState, action) => {
         error: ""
       };
     case FETCH_JOKES_FAILED ||
+      FETCH_ALL_JOKES_FAILED ||
       POST_JOKES_FAILED ||
       PUT_JOKES_FAILED ||
       DELETE_JOKES_FAILED:
