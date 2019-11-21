@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../index.css";
 import logo from "./dadjokes.png";
-import { axiosWithAuth as axios } from "../utils/axiosConfig";
+import { getPublicJokes } from "../actions/index";
 import JokeCard from "./JokeCard";
 
 const StyledP = styled.p`
@@ -28,23 +29,13 @@ const StyledNav = styled.nav`
 `;
 
 function PublicDashboard() {
-  const [jokes, setJokes] = useState([]);
+  const jokes = useSelector(state => state.jokes);
+  const dispatch = useDispatch();
   const [joke, setJoke] = useState([]);
 
   useEffect(() => {
-    axios()
-      .get("/api/jokes/public")
-      .then(res => {
-        setJokes(res.data);
-        setJoke({
-          id: 100,
-          joke: "Don't trust atoms.",
-          punchline: "They make up everything!"
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    dispatch(getPublicJokes());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = event => {
