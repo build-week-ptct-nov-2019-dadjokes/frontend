@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { axiosWithAuth as axios } from "../utils/axiosConfig";
 import {
   Button,
   Modal,
@@ -8,8 +9,6 @@ import {
   Col,
   FormGroup
 } from "react-bootstrap";
-import axios from "axios";
-import { Cookies } from "react-cookie";
 
 export default class Register extends Component {
   constructor(props) {
@@ -17,8 +16,7 @@ export default class Register extends Component {
     console.log(this);
     this.render.bind(this);
     this.state = { showModal: false };
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
@@ -31,12 +29,8 @@ export default class Register extends Component {
     this.setState({ showModal: true });
   }
 
-  handleFirstNameChange(e) {
-    this.setState({ firstName: e.target.value });
-  }
-
-  handleLastNameChange(e) {
-    this.setState({ lastName: e.target.value });
+  handleUsernameChange(e) {
+    this.setState({ username: e.target.value });
   }
 
   handleEmailChange(e) {
@@ -48,46 +42,23 @@ export default class Register extends Component {
   }
 
   signUp() {
-    console.log(this);
-    var that = this;
-    axios
-      .post("https://api.tech/users", {
-        user: {
-          email: this.state.email,
-          password: this.state.password
-        }
-      })
-      .then(function(response) {
-        console.log(response);
-        var userInfo = {
-          id: response.data.data.id,
-          token: response.data.data.attributes["auth-token"]
-        };
-        Cookies.save("user", userInfo);
-        axios({
-          method: "put",
-          url: "https://api.tech/users/" + response.data.data.id,
-          headers: {
-            Authorization: response.data.data.attributes["auth-token"]
-          },
-          data: {
-            user: {
-              first_name: that.state.firstName,
-              last_name: that.state.lastName
-            }
-          }
-        });
-        that.setState({ showModal: false });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    axios()
+      .post("/api/auth/register", user)
+      .then(res => this.props.history.push("/login"))
+      .catch(err => console.log(err.response));
   }
 
   handleSelect(event) {
     event.preventDefault();
     alert(`selected ${event}`);
   }
+
   render() {
     return (
       <div>
@@ -111,18 +82,10 @@ export default class Register extends Component {
             <form>
               <FormGroup>
                 <input
-                  value={this.state.firstName}
-                  onChange={this.handleFirstNameChange}
+                  value={this.state.username}
+                  onChange={this.handleUsernameChange}
                   className="form-control"
-                  placeholder="First Name"
-                />
-              </FormGroup>
-              <FormGroup>
-                <input
-                  value={this.state.lastName}
-                  onChange={this.handleLastNameChange}
-                  className="form-control"
-                  placeholder="Last Name"
+                  placeholder="Username"
                 />
               </FormGroup>
               <FormGroup>
