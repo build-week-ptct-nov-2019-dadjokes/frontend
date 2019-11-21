@@ -1,36 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { axiosWithAuth as axios } from "../utils/axiosConfig";
-
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       username: "",
       password: "",
       errors: {}
     };
   }
-
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-
   onSubmit = e => {
     e.preventDefault();
     const userData = {
       username: this.state.username,
       password: this.state.password
     };
-
-    console.log(userData);
-
     axios()
       .post("/api/auth/login", userData)
       .then(res => console.log(res))
       .catch(err => console.log(err.response));
+    console.log(userData);
   };
-
   render() {
     const { errors } = this.state;
     return (
