@@ -6,6 +6,7 @@ import MyWallet from "./components/MyWallet";
 import FormikAddForm from "./components/AddJoke";
 import "./App.css";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={PublicDashboard} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/userdashboard" component={UserDashboard} />
         <Route exact path="/mywallet" component={MyWallet} />
         <Route exact path="/searchjokes" />

@@ -12,8 +12,8 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 
 export default class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     console.log(this);
     this.render.bind(this);
     this.state = { showModal: false };
