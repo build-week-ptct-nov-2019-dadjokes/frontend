@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import {
-  FormGroup,
-  FormControl,
-  FormLabel
-} from "react-bootstrap";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import LoaderButton from "./LoaderButton";
-import { useFormFields } from './libs/hookLibs';
-
+import { useFormFields } from "./libs/hookLibs";
 
 export default function Register(props) {
   const [fields, handleFieldChange] = useFormFields({
-    firstname: "",
-    lastname: "",
     username: "",
     email: "",
     password: "",
@@ -23,8 +16,6 @@ export default function Register(props) {
 
   function validateForm() {
     return (
-      fields.firstname.length > 0 &&
-      fields.lastname.length > 0 &&
       fields.username.length > 0 &&
       fields.email.length > 0 &&
       fields.password.length > 0 &&
@@ -80,25 +71,7 @@ export default function Register(props) {
   function renderForm() {
     return (
       <form onSubmit={handleSubmit} className="regInfo">
-        <FormGroup controlId="firstname" bsSize="large">
-          <FormLabel>First Name</FormLabel>
-          <FormControl
-            autoFocus
-            type="firstname"
-            value={fields.firstname}
-            onChange={handleFieldChange}
-          />
-          </FormGroup>
-          <FormGroup controlId="lastname" bsSize="large">
-          <FormLabel>Last Name</FormLabel>
-          <FormControl
-            autoFocus
-            type="lastname"
-            value={fields.lastname}
-            onChange={handleFieldChange}
-          />
-          </FormGroup>
-          <FormGroup controlId="username" bsSize="large">
+        <FormGroup controlId="username" bsSize="large">
           <FormLabel>Username</FormLabel>
           <FormControl
             autoFocus
@@ -106,7 +79,7 @@ export default function Register(props) {
             value={fields.username}
             onChange={handleFieldChange}
           />
-          </FormGroup>
+        </FormGroup>
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email</FormLabel>
           <FormControl
@@ -132,12 +105,14 @@ export default function Register(props) {
             value={fields.confirmPassword}
           />
         </FormGroup>
-        <LoaderButton style={{background: "#0E0E40", border: "#0E0E40" }}
+        <LoaderButton
+          style={{ background: "#0E0E40", border: "#0E0E40" }}
           block
           type="submit"
           bsSize="large"
           isLoading={isLoading}
-          disabled={!validateForm()}>
+          disabled={!validateForm()}
+        >
           Signup
         </LoaderButton>
       </form>
