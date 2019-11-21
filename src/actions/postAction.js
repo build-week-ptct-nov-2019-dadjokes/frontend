@@ -7,7 +7,7 @@ export const POST_JOKES_FAILED = "POST_JOKES_FAILED";
 export const postJokes = value => dispatch => {
   dispatch({ type: POST_JOKES_START });
   axios()
-    .post(`/api/jokes`)
-    .then(res => dispatch({ type: POST_JOKES_SUCCESS, payload: value }))
+    .post(`/api/jokes`, value)
+    .then(res => dispatch({ type: POST_JOKES_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: POST_JOKES_FAILED, payload: err.response }));
 };
