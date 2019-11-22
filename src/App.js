@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/userdashboard" component={UserDashboard} />
         <PrivateRoute exact path="/mywallet" component={MyWallet} />
-        <PrivateRoute exact path="/searchjokes" />
+        {/* <PrivateRoute exact path="/searchjokes" /> */}
         <PrivateRoute exact path="/addjoke" component={FormikAddForm} />
       </Switch>
     </div>
