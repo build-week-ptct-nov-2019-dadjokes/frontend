@@ -6,7 +6,7 @@ export const FETCH_JOKES_FAILED = "FETCH_JOKES_FAILED";
 
 export const getPublicJokes = () => dispatch => {
   dispatch({ type: FETCH_JOKES_START });
-  axios
+  axios()
     .get(`/api/jokes/public`)
     .then(res => dispatch({ type: FETCH_JOKES_SUCCESS, payload: res.data }))
     .catch(err =>
