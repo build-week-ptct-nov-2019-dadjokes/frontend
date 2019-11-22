@@ -6,19 +6,20 @@ import MyWallet from "./components/MyWallet";
 import FormikAddForm from "./components/AddJoke";
 import './App.css';
 import Register from './components/Register';
+import SearchForm from "./components/Search";
+import Login from "./components/Login";
 
 
 function App() {
   return (
-    <div className="App">
-      <FormikAddForm />    
+    <div className="App">  
       <Switch>
-        <Route exact path="/" />
-        <Route path="/register" />
+        <Route exact path="/" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/publicdashboard" component={PublicDashboard} />
         <Route path="/userdashboard" component={UserDashboard} />
         <Route path="/mywallet" component={MyWallet} />
-        <Route path="/searchjokes" />
+        <Route path="/searchjokes" component={SearchForm} />
         <Route path="/addjoke" component={FormikAddForm} />
       </Switch>  
     </div>

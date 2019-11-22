@@ -38,7 +38,7 @@ function MyWallet() {
     
     useEffect(() => {
         axios
-            .get("https://lambda-dad-jokes.herokuapp.com/api/jokes")
+            .get("https://lambda-dad-jokes.herokuapp.com/api/jokes/public")
             .then(res => {
                 console.log(res);
             })

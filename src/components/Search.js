@@ -34,4 +34,4 @@ class SearchForm extends React.Component {
   }
   
 
-  export default SearchForm
+  export default SearchForm;
