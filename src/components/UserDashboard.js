@@ -70,9 +70,7 @@ function UserDashboard() {
             New Joke
           </button>
         </form>
-        {/* {joke && (
-          // <JokeCard id={joke.id} joke={joke.joke} punchline={joke.punchline} />
-        )} */}
+        {joke && <JokeCard joke={joke} />}
       </StyledSection>
       <footer>
         <StyledNav>
