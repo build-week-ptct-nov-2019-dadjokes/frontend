@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { axiosWithAuth as axios } from "../utils/axiosConfig";
+
 class Login extends Component {
   constructor() {
     super();
@@ -21,7 +22,11 @@ class Login extends Component {
     };
     axios()
       .post("/api/auth/login", userData)
-      .then(res => console.log(res))
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        this.props.history.push("/userdashboard");
+        console.log(res);
+      })
       .catch(err => console.log(err.response));
     console.log(userData);
   };
@@ -31,8 +36,8 @@ class Login extends Component {
       <div className="container">
         <div
           style={{
-            marginTop: "-9rem",
-            marginLeft: "1200px",
+            // marginTop: "-9rem",
+            // marginLeft: "1200px",
             width: "600px",
             paddingTop: "30px",
             display: "flex"
