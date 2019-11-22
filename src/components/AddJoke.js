@@ -28,11 +28,11 @@ const StyledNav = styled.nav`
   padding-bottom: 0.5rem;
 `;
 
-function AddJoke({ values, errors, touched, status }) {
+function AddJoke({ history, values, errors, touched, status }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postJokes(status));
+    dispatch(postJokes(status, history));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
