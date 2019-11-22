@@ -6,32 +6,25 @@ import JokeCard from "./JokeCard";
 import axios from "axios";
 
 const StyledP = styled.p`
-    color: black;
+  color: black;
 `;
 
 const StyledSection = styled.section`
-    text-align: center;
-    font-family: "Lucida Console", Monaco, monospace;
-    color: #0E0E40;
-    background-color: #77BFB8;
-    padding-top: 3rem;
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+  color: #0e0e40;
+  background-color: #77bfb8;
+  padding-top: 3rem;
 `;
-
 
 const StyledNav = styled.nav`
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    background-color: white;
-    padding-bottom: 0.5rem;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  background-color: white;
+  padding-bottom: 0.5rem;
 `;
-
-
-
-
 
 function MyWallet() {
     const [all, setAll] = useState([]);

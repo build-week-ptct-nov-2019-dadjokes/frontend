@@ -4,24 +4,23 @@ import PublicDashboard from "./components/PublicDashboard";
 import UserDashboard from "./components/UserDashboard";
 import MyWallet from "./components/MyWallet";
 import FormikAddForm from "./components/AddJoke";
-import './App.css';
-import Register from './components/Register';
-import SearchForm from "./components/Search";
+import "./App.css";
+import Register from "./components/Register";
 import Login from "./components/Login";
-
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
-    <div className="App">  
+    <div className="App">
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/publicdashboard" component={PublicDashboard} />
-        <Route path="/userdashboard" component={UserDashboard} />
-        <Route path="/mywallet" component={MyWallet} />
-        <Route path="/searchjokes" component={SearchForm} />
-        <Route path="/addjoke" component={FormikAddForm} />
-      </Switch>  
+        <Route exact path="/" component={PublicDashboard} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/userdashboard" component={UserDashboard} />
+        <PrivateRoute exact path="/mywallet" component={MyWallet} />
+        <PrivateRoute exact path="/searchjokes" />
+        <PrivateRoute exact path="/addjoke" component={FormikAddForm} />
+      </Switch>
     </div>
   );
 }
