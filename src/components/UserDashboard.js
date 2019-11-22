@@ -42,6 +42,8 @@ function UserDashboard() {
     setJoke(jokes[Math.floor(Math.random() * jokes.length)]);
   };
 
+
+
   return (
     <div>
       <StyledNav>
@@ -55,6 +57,8 @@ function UserDashboard() {
         <Link to="/addjoke" className="links">
           Add Joke
         </Link>
+        <Link to="logout" className="links"/>
+        Logout
       </StyledNav>
       <StyledSection>
         <h1>Welcome User!</h1>
