@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
 import { Link } from "react-router-dom";
-import JokeCard from "./JokeCard";
 import { getAllJokes } from "../actions/allJokesAction";
-import { Container, Row, Col } from "reactstrap";
+import { Col } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -27,18 +27,34 @@ const StyledSection = styled.section`
   background-color: #77bfb8;
   padding-top: 3rem;
 `;
-
+function JokeCard(props) {
+  return (
+    <div>
+      <Card key={props.id}>
+        <CardBody>
+          <CardTitle>{props.joke}</CardTitle>
+          <CardText>{props.punchline}</CardText>
+        </CardBody>
+        <form>
+          <button className="search-button" type="submit">Update</button>
+        </form>
+        <form>
+          <button className="search-button" type="submit">Delete</button>
+        </form>
+      </Card>
+    </div>
+  );
+}
 function UserDashboard() {
   const jokes = useSelector(state => state.jokes);
   const dispatch = useDispatch();
-  const [joke, setJoke] = useState([]);
   
 
   useEffect(() => {
     dispatch(getAllJokes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(jokes);
   return (
     <div>
       <StyledNav>
@@ -62,18 +78,18 @@ function UserDashboard() {
         <StyledP>
           All of our jokes are displayed below for your viewing pleasure, we hope you enjoy them!
         </StyledP>
-        {jokes.map(index => {
-          return(
-            <JokeCard key={index.id} joke={index.joke} punchline={index.punchline} />
-          )
-        })}
+        
+          {jokes.map(index => {
+            return(
+              <Col>
+                <JokeCard key={index.id} joke={index.joke} punchline={index.punchline} />
+              </Col>
+              
+              
+            )
+          })}
+        
       </StyledSection>
-      <footer>
-        <StyledNav>
-          <Link to="#">Home</Link>
-          <Link to="#">About Us</Link>
-        </StyledNav>
-      </footer>
     </div>
   );
 }
