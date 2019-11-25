@@ -28,11 +28,11 @@ const StyledNav = styled.nav`
   padding-bottom: 0.5rem;
 `;
 
-function AddJoke({ values, errors, touched, status }) {
+function AddJoke({ history, values, errors, touched, status }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postJokes(status));
+    dispatch(postJokes(status, history));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
@@ -87,6 +87,7 @@ function AddJoke({ values, errors, touched, status }) {
 }
 
 export default withFormik({
+  // @ts-ignore
   mapPropsToValues: ({ joke, punchline, privateJoke }) => {
     return {
       joke: joke || "",
@@ -109,4 +110,5 @@ export default withFormik({
   handleSubmit(values, { setStatus }) {
     setStatus(values);
   }
+  // @ts-ignore
 })(AddJoke);

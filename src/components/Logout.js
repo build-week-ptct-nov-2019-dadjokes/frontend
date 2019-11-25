@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import { Redirect } from "react-router-dom"
-import { Button } from "semantic-ui-react"
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { Button } from "reactstrap";
 
 class Logout extends Component {
   state = {
@@ -8,18 +8,22 @@ class Logout extends Component {
   };
 
   logout = () => {
-    localStorage.clear("token");
-    this.setState({navigate: true });
+    localStorage.removeItem("token");
+    this.setState({ navigate: true });
   };
 
   render() {
-    const { navigate } =this.state;
+    const { navigate } = this.state;
 
     if (navigate) {
       return <Redirect to="/" push={true} />;
     }
 
-    return <Button onClick={this.logout}>Logout</Button>;
+    return (
+      <Button className="links" onClick={this.logout}>
+        Logout
+      </Button>
+    );
   }
 }
 
