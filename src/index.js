@@ -5,14 +5,13 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, withRouter } from "react-router-dom";
 import { reducer } from "./reducer";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 import App from "./App";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AppWithRouter = withRouter(App);
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 render(
   <Provider store={store}>
