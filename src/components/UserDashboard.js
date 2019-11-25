@@ -51,9 +51,9 @@ function UserDashboard() {
         <Link to="/mywallet" className="links">
           My Wallet
         </Link>
-        <Link to="/searchjokes" className="links">
+        {/* <Link to="/searchjokes" className="links">
           Search Jokes
-        </Link>
+        </Link> */}
         <Link to="/addjoke" className="links">
           Add Joke
         </Link>
