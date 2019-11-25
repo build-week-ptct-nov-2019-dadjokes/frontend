@@ -5,11 +5,13 @@ import logo from "./dadjokes.png";
 import { Link } from "react-router-dom";
 import JokeCard from "./JokeCard";
 import { getAllJokes } from "../actions/allJokesAction";
+import Logout from "./Logout";
 
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   background-color: white;
   padding-bottom: 0.5rem;
@@ -55,6 +57,7 @@ function UserDashboard() {
         <Link to="/addjoke" className="links">
           Add Joke
         </Link>
+        <Logout />
       </StyledNav>
       <StyledSection>
         <h1>Welcome User!</h1>
