@@ -17,12 +17,15 @@ function JokeCard(props) {
     <div>
       <Card key={props.joke.id}>
         <CardBody>
+          {/* Logic to only render the joke and punchline for public dashboard */}
           {!loggedIn && (
             <>
               <CardTitle>{props.joke.joke}</CardTitle>
               <CardText>{props.joke.punchline}</CardText>
             </>
           )}
+
+          {/* Basic editing functionality since we didn't have a route to pull specific jokes from database */}
           {isEditing ? (
             <Input
               type="text"
@@ -52,6 +55,8 @@ function JokeCard(props) {
             </Button>
           )}
         </CardBody>
+
+        {/* If user is logged in it will display these buttons */}
         {loggedIn && (
           <>
             <Button
