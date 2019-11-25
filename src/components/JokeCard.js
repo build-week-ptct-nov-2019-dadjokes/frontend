@@ -47,7 +47,13 @@ function JokeCard(props) {
           {isEditing && (
             <Button
               onClick={() => {
-                dispatch(putJokes(props.joke.id));
+                dispatch(
+                  putJokes(props.joke.id, {
+                    ...props.joke,
+                    joke: joke,
+                    punchline: punchline
+                  })
+                );
                 setIsEditing(false);
               }}
             >
