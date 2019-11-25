@@ -87,6 +87,7 @@ function AddJoke({ history, values, errors, touched, status }) {
 }
 
 export default withFormik({
+  // @ts-ignore
   mapPropsToValues: ({ joke, punchline, privateJoke }) => {
     return {
       joke: joke || "",
@@ -109,4 +110,5 @@ export default withFormik({
   handleSubmit(values, { setStatus }) {
     setStatus(values);
   }
+  // @ts-ignore
 })(AddJoke);
