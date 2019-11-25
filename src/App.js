@@ -7,8 +7,8 @@ import FormikAddForm from "./components/AddJoke";
 import "./App.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Logout from './components/Logout';
 import PrivateRoute from "./routes/PrivateRoute";
+import UpdateJoke from "./components/UpdateJoke";
 
 function App() {
   return (
@@ -19,9 +19,8 @@ function App() {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/userdashboard" component={UserDashboard} />
         <PrivateRoute exact path="/mywallet" component={MyWallet} />
-        <PrivateRoute exact path="/logout" component={Logout} />
-        {/* <PrivateRoute exact path="/searchjokes" /> */}
         <PrivateRoute exact path="/addjoke" component={FormikAddForm} />
+        <PrivateRoute exact path="/updateJoke/:id" component={UpdateJoke} />
       </Switch>
     </div>
   );
