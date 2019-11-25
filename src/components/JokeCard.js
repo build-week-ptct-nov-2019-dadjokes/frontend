@@ -30,7 +30,8 @@ function JokeCard(props) {
             <Input
               type="text"
               value={joke}
-              onChange={() => handleJokeChanges()}
+              name="joke"
+              onChange={e => handleJokeChanges(e.target.value)}
             />
           ) : (
             <CardTitle>{joke}</CardTitle>
@@ -39,7 +40,8 @@ function JokeCard(props) {
             <Input
               type="text"
               value={punchline}
-              onChange={() => handlePunchlineChanges()}
+              name="punchline"
+              onChange={e => handlePunchlineChanges(e.target.value)}
             />
           ) : (
             <CardText>{punchline}</CardText>
