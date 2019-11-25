@@ -37,7 +37,7 @@ function UserDashboard() {
   useEffect(() => {
     dispatch(getAllJokes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   // const onSubmit = event => {
   //   event.preventDefault();
