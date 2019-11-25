@@ -17,6 +17,12 @@ function JokeCard(props) {
     <div>
       <Card key={props.joke.id}>
         <CardBody>
+          {!loggedIn && (
+            <>
+              <CardTitle>{props.joke.joke}</CardTitle>
+              <CardText>{props.joke.punchline}</CardText>
+            </>
+          )}
           {isEditing ? (
             <Input
               type="text"
