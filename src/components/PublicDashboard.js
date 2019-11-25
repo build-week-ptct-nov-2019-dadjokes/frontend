@@ -76,8 +76,20 @@ function PublicDashboard() {
       </StyledSection>
       <footer>
         <StyledNav>
-          <Link to="#">Home</Link>
-          <Link to="#">About Us</Link>
+          <a
+            href="https://elegant-mclean-a95fe8.netlify.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Home
+          </a>
+          <a
+            href="https://elegant-mclean-a95fe8.netlify.com/about"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            About Us
+          </a>
         </StyledNav>
       </footer>
     </div>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
-import JokeCard from "./JokeCard";
+// import JokeCard from "./JokeCard";
 import axios from "axios";
 
 const StyledP = styled.p`
@@ -27,7 +28,7 @@ const StyledNav = styled.nav`
 `;
 
 function MyWallet() {
-  const [all, setAll] = useState([]);
+  // const [all, setAll] = useState([]);
 
   useEffect(() => {
     axios
