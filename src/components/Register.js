@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-script-url */
+// @ts-nocheck
 import React, { Component } from "react";
 import { axiosWithAuth as axios } from "../utils/axiosConfig";
 import {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import logo from "./dadjokes.png";
@@ -32,17 +32,17 @@ const StyledSection = styled.section`
 function UserDashboard() {
   const jokes = useSelector(state => state.jokes);
   const dispatch = useDispatch();
-  const [joke, setJoke] = useState([]);
+  // const [joke, setJoke] = useState([]);
 
   useEffect(() => {
     dispatch(getAllJokes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = event => {
-    event.preventDefault();
-    setJoke(jokes[Math.floor(Math.random() * jokes.length)]);
-  };
+  // const onSubmit = event => {
+  //   event.preventDefault();
+  //   setJoke(jokes[Math.floor(Math.random() * jokes.length)]);
+  // };
 
   return (
     <div>
@@ -65,17 +65,14 @@ function UserDashboard() {
           Here you can find all of our jokes, and have features at the top such
           as view your private wallet, search, and add jokes.
         </StyledP>
-        <StyledP>
-          One of our jokes is displayed below, press next joke to get another.
-        </StyledP>
-        <form onSubmit={onSubmit}>
+        {/* <form onSubmit={onSubmit}>
           <button type="submit" className="search-button">
             New Joke
           </button>
-        </form>
-        {joke && <JokeCard joke={joke} />}
+        </form> */}
+        {jokes && jokes.map(joke => <JokeCard key={joke.id} joke={joke} />)}
       </StyledSection>
-      <footer>
+      {/* <footer>
         <StyledNav>
           <a
             href="https://elegant-mclean-a95fe8.netlify.com/"
@@ -92,7 +89,7 @@ function UserDashboard() {
             About Us
           </a>
         </StyledNav>
-      </footer>
+      </footer> */}
     </div>
   );
 }

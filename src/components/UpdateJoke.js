@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "./dadjokes.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { putJokes } from "../actions/putAction";
+// import { putJokes } from "../actions/putAction";
 import { getAllJokes } from "../actions/allJokesAction";
 
 const StyledP = styled.p`
@@ -33,6 +33,7 @@ function UpdateJoke(props) {
 
   useEffect(() => {
     dispatch(getAllJokes());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let updatedJoke = jokes.filter(joke => joke.id === props.match.params.id);
