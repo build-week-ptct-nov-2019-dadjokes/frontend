@@ -15,7 +15,6 @@ const Register = props => {
       email,
       password
     };
-    console.log(user);
     axios()
       .post("/api/auth/register", user)
       .then(res => props.history.push("/login"))
