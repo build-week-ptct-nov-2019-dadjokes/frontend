@@ -1,15 +1,9 @@
 import React from "react";
 import { useInput } from "../hooks/useInput";
-import {
-  Input,
-  Label,
-  Button,
-  Wrapper,
-  Title,
-  SubmitButton
-} from "./styled/index";
+import { axiosWithAuth as axios } from "../utils/axiosConfig";
+import { Input, Label, Wrapper, Title, SubmitButton } from "./styled/index";
 
-const Register = () => {
+const Register = props => {
   const [username, handleUsername] = useInput("");
   const [email, handleEmail] = useInput("");
   const [password, handlePassword] = useInput("");
@@ -22,6 +16,10 @@ const Register = () => {
       password
     };
     console.log(user);
+    axios()
+      .post("/api/auth/register", user)
+      .then(res => props.history.push("/login"))
+      .catch(err => console.log(err));
   };
 
   return (
